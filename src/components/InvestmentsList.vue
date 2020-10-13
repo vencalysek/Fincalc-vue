@@ -1,20 +1,35 @@
 <template>
-    <div>
-        <div v-for="invest in investments" :key="invest.id">
-            <p>{{ invest.title }}</p>
-            <p>{{ invest.price }}</p>
-            <p>{{ invest.annualIntrest }}</p>
+    <div class="container">
+        <div class="center">
+            <h2 class="teal-text text-darken-4 center">
+            Saved Investments
+            </h2>
+        </div>
+        
+        <div v-for="investment in investments" :key="investment.id">
+            <Investment :investment="investment" />
         </div>
 
     </div>
 </template>
 
 <script>
+    import Investment from './Investment.vue';
+
     export default {
-        props: ['investments']
+        name: 'InvestmentsList',
+        props: ['investments'],
+        components: {
+            Investment
+        }
     }
 </script>
 
-<style>
-
+<style scoped>
+    h2 {
+        display: inline-block;
+        font-size: 24px;
+        font-weight: bold;
+        border-bottom: solid teal 2px;
+    }
 </style>

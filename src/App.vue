@@ -1,18 +1,11 @@
 <template>
   <div class="container">
     <h3 class="center teal-text text-darken-4 teal lighten-5">FinCalc App</h3>
-    <app-add-invest v-on:push-to-holder="pushToHolder" ></app-add-invest>
-    
-    <div v-if="investHolder != ''">
-      <hr>
-      <p> {{investHolder.title}} </p>
-      <p> Investment price: {{investHolder.price}} Kč</p>
-      <p> Expected annual intrest: {{investHolder.annualIntrest}} % </p>
-      <button class="btn" @click="saveInvets">save</button>
-    </div>
+    <AddInvest v-on:push-to-holder="pushToHolder" />
 
+    <Holder :investHolder="investHolder" v-on:save-invest="saveInvest" />
 
-    <InvestmentsList :investments="investments" />
+    <InvestmentsList v-show="investments.length > 0" :investments="investments" />
     
     
   </div>
@@ -21,6 +14,7 @@
 <script>
 import AddInvest from './components/AddInvest.vue';
 import InvestmentsList from './components/InvestmentsList.vue';
+import Holder from './components/Holder.vue'
 
 export default {
   data () {
@@ -35,13 +29,15 @@ export default {
     }
   },
   components: {
-    appAddInvest: AddInvest,
-    InvestmentsList
+    AddInvest,
+    InvestmentsList,
+    Holder
 
   },
   methods: {
-    saveInvets() {
+    saveInvest() {
       this.investments = [...this.investments, this.investHolder]
+      this.investHolder = ''
     },
     pushToHolder(newInvest) {
       this.investHolder = newInvest
@@ -59,5 +55,9 @@ export default {
   h3 {
     border-radius: 5px;
   }
+  .btn {
+    outline: none;
+  }
+  
 
 </style>
