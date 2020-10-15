@@ -52,9 +52,18 @@ export default {
     font-family: 'Montserrat', sans-serif;
   }
 
-  h3 {
-    border-radius: 5px;
+  .container {
+    /* width: 60%;
+    min-width: 450px; */
+    max-width: 650px;
   }
+  
+  h3 {
+
+    margin: 20px auto;
+    border-radius: 2.5px;
+  }
+
   .btn {
     outline: none;
   }

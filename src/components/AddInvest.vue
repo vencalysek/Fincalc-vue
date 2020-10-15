@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
 
         <form @submit="pushToHolder">
             <div class="row">
@@ -31,7 +31,7 @@
             </div>
 
 
-            <div class="container center">
+            <div class="btn-container">
                 <input type="submit" class="btn" value="Submit">
             </div>            
 
@@ -47,11 +47,24 @@
                 title: '',
                 monthPayment: null,
                 annualIntrest: null,
-                investHorizon: null,
-                finalValue: null
+                investHorizon: null
             }
         },
         methods: {
+
+            countFinalValue() {
+                let currentValue = 0;
+                for (let i = 0; i < this.investHorizon; i++) {
+                    currentValue = Math.floor((currentValue + parseInt(this.monthPayment)*12) * Math.pow(1+this.annualIntrest/100,1)*100)/100
+                    console.log(currentValue)
+                }
+                return currentValue
+            },
+
+            netProfit() {
+                return this.countFinalValue() - this.monthPayment*12*this.investHorizon
+            },
+
             pushToHolder(e) {
                 e.preventDefault();
                 if (this.title != '' && this.monthPayment != null && this.annualIntrest != null && this.investHorizon != 0) {
@@ -61,10 +74,9 @@
                         monthPayment: this.monthPayment,
                         annualIntrest: this.annualIntrest,
                         investHorizon: this.investHorizon,
-
-                        // ! spatny vzorec, nepocita mesicni narust ale pouze vstupni kapital
-                        finalValue: Math.floor(this.monthPayment*12*Math.pow(1+this.annualIntrest/100,this.investHorizon))
-
+                        paidValue: this.monthPayment*12*this.investHorizon,
+                        finalValue: this.countFinalValue(),
+                        netProfit: Math.floor(this.netProfit()*100)/100
                     }
                     this.$emit('push-to-holder', newInvest)
                     this.title = ''
@@ -80,11 +92,17 @@
 </script>
 
 <style scoped>
-    form {
-        margin-top: 50px;
-    }
     .units {
         font-style: italic;
         font-weight: lighter;
+    }
+    .btn {
+        margin-top: -20px;
+        display: flex;
+        justify-content: center;
+    }
+    .btn-container {
+        display: flex;
+        justify-content: center;
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div>
         <div class="center">
-            <h2 class="teal-text text-darken-4 center">
+            <h2 class="teal-text text-darken-4">
             Saved Investments
             </h2>
         </div>

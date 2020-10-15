@@ -1,6 +1,6 @@
 <template>
-    <div v-if="investHolder !== ''" class="investment-container container">
-        <p>Invest Title: <span>{{ investHolder.title }}</span></p>
+    <div v-if="investHolder !== ''" class="investment-container">
+        <!-- <p class="title">{{ investHolder.title }}</p> -->
 
         <p>Monthly Payment:  <span>{{ investHolder.monthPayment }} Kč</span></p>
 
@@ -9,10 +9,16 @@
         <!-- if else for year / years -->
         <p v-if="investHolder.investHorizon == 1" >Investment Horizon: <span>{{ investHolder.investHorizon }} year</span></p>
         <p v-else-if="investHolder.investHorizon > 1" >Investment Horizon: <span>{{ investHolder.investHorizon }} years</span></p>
+
+        <p>Total payment: <span>{{ investHolder.paidValue }} Kč</span></p>
         
         <!-- if else for year / years -->
         <p v-if="investHolder.investHorizon == 1" class="final-value">Final value after {{ investHolder.investHorizon }} year is: <span>{{ investHolder.finalValue}} Kč</span></p>
-        <p v-else-if="investHolder.investHorizon > 1" class="final-value">Final value after {{ investHolder.investHorizon }} years is: <span>{{ investHolder.finalValue}} Kč</span></p>
+        <p v-else-if="investHolder.investHorizon > 1" class="final-value">Final value after {{ investHolder.investHorizon }} years: <span>{{ investHolder.finalValue}} Kč</span></p>
+
+
+        <p v-if="investHolder.netProfit > 0" class="profit-value">Total net profit: <span>+ {{ investHolder.netProfit }}</span></p>
+        <p v-else-if="investHolder.netProfit <= 0" class="profit-value">Total net profit: <span> {{ investHolder.netProfit }}</span></p>
 
         <div class="center container">
             <button class="btn" v-on:click="$emit('save-invest')">save</button>
@@ -30,22 +36,32 @@
 <style scoped>
     .investment-container {
         font-size: 16px;
-        width: 68%;
     }
     p {
         display: flex;
         justify-content: space-between;
         font-style: normal;
         font-weight: normal;
+        margin: 10px 0;
     }
     span {
         font-style: italic;
         font-weight: bold;
     }
+    .title{
+        display: flex;
+        justify-content: center;
+        text-transform: capitalize;
+        font-style: italic;
+        font-weight: bold;
+    }
     .final-value {
         font-size: 18px;
-        border-top: 1px solid teal;
-        border-bottom: 1px solid teal;
+        border-top: 2px solid teal;
+    }
+    .profit-value {
+        font-size: 18px;
+        border-bottom: 2px solid teal;
     }
 
 </style>
