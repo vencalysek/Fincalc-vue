@@ -7,7 +7,9 @@
         </div>
         
         <div v-for="investment in investments" :key="investment.id">
-            <Investment :investment="investment" />
+            <Investment 
+                :investment="investment" 
+                @del-invest="$emit('del-invest', investment.id)"/>
         </div>
 
     </div>

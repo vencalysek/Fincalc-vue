@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <h3 class="center teal-text text-darken-4 teal lighten-5">FinCalc App</h3>
-    test
-    <AddInvest v-on:push-to-holder="pushToHolder" />
+    <AddInvest @save-invest="saveInvest" />
 
-    <Holder :investHolder="investHolder" v-on:save-invest="saveInvest" />
-
-    <InvestmentsList v-show="investments.length > 0" :investments="investments" />
+    <InvestmentsList 
+      v-show="investments.length > 0" 
+      :investments="investments" 
+      @del-invest="deleteInvest" />
     
     
   </div>
@@ -15,7 +15,6 @@
 <script>
 import AddInvest from './components/AddInvest.vue';
 import InvestmentsList from './components/InvestmentsList.vue';
-import Holder from './components/Holder.vue'
 
 export default {
   data () {
@@ -25,24 +24,23 @@ export default {
         // {id: 1, title: 'Test 2', price: 100000, annualIntrest: 7.5},
         // {id: 2, title: 'Test 3', price: 100000, annualIntrest: 6}
       ],
+      savedInvestHolder: ''
 
-      investHolder: ''
     }
   },
   components: {
     AddInvest,
-    InvestmentsList,
-    Holder
+    InvestmentsList
 
   },
   methods: {
-    saveInvest() {
-      this.investments = [...this.investments, this.investHolder]
+    saveInvest(holder) {
+      this.savedInvestHolder = holder
+      this.investments = [...this.investments, this.savedInvestHolder]
       this.investHolder = ''
     },
-    pushToHolder(newInvest) {
-      this.investHolder = newInvest
-      console.log(this.investHolder)
+    deleteInvest(id) {
+      this.investments = this.investments.filter(invest => invest.id != id)
     }
   },
 }
@@ -54,13 +52,23 @@ export default {
   }
 
   .container {
-    /* width: 60%;
-    min-width: 450px; */
     max-width: 650px;
   }
-  
-  h3 {
 
+  p {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-style: normal;
+    font-weight: normal;
+    }
+
+  span {
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  h3 {
     margin: 20px auto;
     border-radius: 2.5px;
   }
@@ -68,6 +76,27 @@ export default {
   .btn {
     outline: none;
   }
-  
+
+  .investment-container {
+    font-size: 16px;
+  }
+
+  .title{
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .final-value {
+    font-size: 18px;
+    border-top: 2px solid teal;
+  }
+
+  .profit-value {
+    font-size: 18px;
+    border-bottom: 2px solid teal;
+  }
 
 </style>

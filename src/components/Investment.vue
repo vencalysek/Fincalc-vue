@@ -1,6 +1,15 @@
 <template>
     <div class="investment-container" >
-        <p class="title">{{ investment.title }}</p>
+        <div class="title-btn-wrap">
+            <p class="title">{{ investment.title }}</p>
+            
+            <button @click="$emit('del-invest', investment.id)" 
+                    class="btn-small btn-floating red">
+                    <i class="large material-icons">remove</i>
+            </button>
+
+        </div>
+        
         <p>Monthly Payment:  <span>{{ investment.monthPayment }} Kč</span></p>
         <p>Expected annual intrest: <span>{{ investment.annualIntrest }} %</span></p>
         <!-- if else for year / years -->
@@ -14,6 +23,7 @@
         <p v-if="investment.netProfit > 0" class="profit-value">Total net profit: <span>+ {{ investment.netProfit }}</span></p>
         <p v-else-if="investment.netProfit <= 0" class="profit-value">Total net profit: <span> {{ investment.netProfit }}</span></p>
 
+
     </div>
 </template>
 
@@ -25,33 +35,15 @@
 </script>
 
 <style scoped>
-    .investment-container {
-        font-size: 16px;
-    }
-    .title{
+    .title-btn-wrap {
         display: flex;
         justify-content: center;
-        text-transform: capitalize;
-        font-style: italic;
-        font-weight: bold;
+        align-items: center;
     }
-    p {
-        display: flex;
-        justify-content: space-between;
-        font-style: normal;
-        font-weight: normal;
+    .title-btn-wrap button {
+        margin-left: 20px;
     }
-    span {
-        font-style: italic;
-        font-weight: bold;
+    .del-btn {
+        margin-left: 25px;
     }
-        .final-value {
-        font-size: 18px;
-        border-top: 2px solid teal;
-    }
-    .profit-value {
-        font-size: 18px;
-        border-bottom: 2px solid teal;
-    }
-
 </style>
