@@ -14,7 +14,6 @@
         <p v-if="investment.netProfit > 0" class="profit-value">Total net profit: <span>+ {{ investment.netProfit }}</span></p>
         <p v-else-if="investment.netProfit <= 0" class="profit-value">Total net profit: <span> {{ investment.netProfit }}</span></p>
 
-        <hr>
     </div>
 </template>
 
