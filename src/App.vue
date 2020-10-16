@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h3 class="center teal-text text-darken-4 teal lighten-5">FinCalc App</h3>
+    test
     <AddInvest v-on:push-to-holder="pushToHolder" />
 
     <Holder :investHolder="investHolder" v-on:save-invest="saveInvest" />
