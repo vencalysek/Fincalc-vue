@@ -16,6 +16,8 @@
         <p v-if="investment.investHorizon == 1" >Investment Horizon: <span>{{ investment.investHorizon }} year</span></p>
         <p v-else-if="investment.investHorizon > 1" >Investment Horizon: <span>{{ investment.investHorizon }} years</span></p>
 
+        <p>Total payment: <span>{{ investment.paidValue }} Kč</span></p>
+
         <!-- if else for year / years -->
         <p v-if="investment.investHorizon == 1" class="final-value">Final value after {{ investment.investHorizon }} year is: <span>{{ investment.finalValue}} Kč</span></p>
         <p v-else-if="investment.investHorizon > 1" class="final-value">Final value after {{ investment.investHorizon }} years is: <span>{{ investment.finalValue}} Kč</span></p>

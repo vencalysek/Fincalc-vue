@@ -129,7 +129,7 @@
             saveInvest() {
                 // todo odeslat data do parent componentu
                 this.$emit('save-invest', this.holder)
-                // this.holder = ''
+                this.holder = ''
             }
         },
         

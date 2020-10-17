@@ -2,13 +2,16 @@
   <div class="container">
     <h3 class="center teal-text text-darken-4 teal lighten-5">FinCalc App</h3>
     <Header />
-    <AddInvest @save-invest="saveInvest" />
+    <router-view @save-invest="saveInvest" 
+      :investments="investments" 
+      @del-invest="deleteInvest" ></router-view>
 
+
+    <!-- <AddInvest @save-invest="saveInvest" />
     <InvestmentsList 
       v-show="investments.length > 0" 
       :investments="investments" 
-      @del-invest="deleteInvest" />
-    
+      @del-invest="deleteInvest" /> -->
     
   </div>
 </template>
