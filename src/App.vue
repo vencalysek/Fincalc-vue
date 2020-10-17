@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h3 class="center teal-text text-darken-4 teal lighten-5">FinCalc App</h3>
+    <Header />
     <AddInvest @save-invest="saveInvest" />
 
     <InvestmentsList 
@@ -13,8 +14,11 @@
 </template>
 
 <script>
+import Header from './components/Header.vue';
 import AddInvest from './components/AddInvest.vue';
 import InvestmentsList from './components/InvestmentsList.vue';
+
+
 
 export default {
   data () {
@@ -29,6 +33,7 @@ export default {
     }
   },
   components: {
+    Header,
     AddInvest,
     InvestmentsList
 
